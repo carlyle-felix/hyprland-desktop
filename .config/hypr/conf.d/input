@@ -1,0 +1,7 @@
+input {
+	sensitivity = 0.1
+	accel_profile = adaptive
+	touchpad {
+		natural_scroll = true
+	}
+}

@@ -1,0 +1,29 @@
+[urgency=low]
+font=LiberationSans 9
+border-color=#009FE3
+background-color=#002F44FC
+progress-color=over #009FE3
+markup=1
+ignore-timeout=1
+default-timeout=2000
+border-radius=3
+
+[urgency=normal]
+font=LiberationSans 10
+border-color=#009FE3
+background-color=#002F44FC
+progress-color=over #009FE3
+markup=1
+ignore-timeout=1
+default-timeout=5000
+border-radius=3
+
+[urgency=critical]
+font=LiberationSans 11
+border-color=#D01F1F
+background-color=#d01f1fFC
+progress-color=over #D01F1F
+markup=1
+ignore-timeout=1
+default-timeout=10000
+border-radius=3

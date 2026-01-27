@@ -1,0 +1,301 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    //"height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    //"spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+		"hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+		"tray",
+		"group/hardware",
+		"group/audio",
+        "group/display",
+        "group/network",
+		"group/power"
+    ],
+    // Modules configuration
+    "hyprland/workspaces": {
+		"format": "{icon}",
+		"on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1"
+	},
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰛐",
+            "deactivated": "󰛑"
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10,
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+	"clock": {
+		// "timezone": "Africa/Johannesburg",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format": "{:%a %h %d  %H:%M}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false,
+		"interval": 2
+    },
+    "memory": {
+        "format": "{}% ",
+		"interval": 2
+    },
+    "temperature": {
+        //"thermal-zone": 2,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["󱃃", "󰔏", "󱃂"],
+		"interval": 2
+    },
+	"bluetooth": {
+		"format-on": "󰂯",
+        "format-off": "󰂲",
+		"format-connected": "󰂱",
+		"format-connected-battery": "󰂱",
+        "on-click": "exec ~/.config/scripts/bluetooth.sh",
+        "on-click-right": "kitty -e bluetoothctl",
+		// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+		"tooltip-format": "{num_connections} connected",
+		"tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t\t{device_battery_percentage}%"
+	},
+	"backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon}",
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "exec ~/.config/scripts/backlight.sh --inc 1",
+        "on-scroll-down": "exec ~/.config/scripts/backlight.sh --dec 1",
+        //"format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": [
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ]
+    },
+	"battery": {
+        "states": {
+            "good": 79,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon}",
+        "format-full": "{icon}",
+        "format-charging": "󰚥",
+        "format-plugged": "󰚥 {capacity}%",
+        //"format-alt": "{icon} {capacity}%",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [
+            "󰁻",
+            "󰁽",
+            "󰁿",
+            "󰂁",
+            "󰁹"
+        ],
+		"interval": 2
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "󱐋",
+        "performance": "󱐋",
+        "balanced": "󰗑",
+        "power-saver": "󰌪"
+      }
+    },
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "󰖩", // {essid} ({signalStrength}%)
+		"tooltip-format-wifi": " SSID:\t\t{essid} \n Local IP:\t{ipaddr} \n Signal:\t\t{signalStrength}% ",
+		"format-ethernet": "󰈀",
+		"tooltip-format": "{essid}\t{signalStrength}%",
+		"format-linked": "󰈀",
+		"format-disconnected": "󰌙",
+		"format-alt": "󰖩 {essid} ({signalStrength}%)",
+		"on-click-right": "kitty -e nmtui"
+    },
+	// Groups
+	"group/power": {
+		"orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        },
+        "modules": [
+            "battery",
+			"power-profiles-daemon",
+			"group/power-menu"
+        ]
+	},
+	"group/network": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": false
+        },
+        "modules": [
+            "network",
+			"custom/wireguard",
+			"bluetooth"
+        ]
+    },
+	"group/display": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": false
+        },
+        "modules": [
+            "backlight",
+			"idle_inhibitor"
+		]
+    },
+	"group/audio": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": false
+        },
+        "modules": [
+            "custom/pipewire",
+            "custom/microphone"
+        ]
+    },
+	"group/hardware": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        },
+        "modules": [
+            "temperature",
+            "cpu",
+			"memory"
+        ]
+    },
+	"group/power-menu": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        },
+        "modules": [
+			"custom/power",
+            "custom/logout",
+            "custom/reboot",
+            "custom/shutdown"
+        ]
+    },
+
+	// custom
+	"custom/pipewire": {
+        "format": "{icon}",
+        "return-type": "json",
+        "min-length": 2,
+        "exec": "~/.config/waybar/scripts/pipewire.sh",
+        "on-scroll-up": "exec ~/.config/scripts/volume.sh --inc 1",
+        "on-scroll-down": "exec ~/.config/scripts/volume.sh --dec 1",
+        "on-click": "exec ~/.config/scripts/volume.sh --toggle",
+        "format-icons": {
+            "mute": "󰝟",
+            "low": "󰕿",
+            "medium": "󰖀",
+            "high": "󰕾"
+        }
+    },
+	"custom/microphone": {
+        "format": "{icon}",
+        "return-type": "json",
+        "tooltip": true,
+        "exec": "~/.config/waybar/scripts/microphone.sh",
+		"on-click": "exec ~/.config/scripts/volume.sh --toggle-mic",
+        "format-icons": {
+            "mute": "󰍭",
+            "unmute": "󰍬"
+        }
+    },
+	"custom/wireguard": {
+        "format": "{icon}",
+        "return-type": "json",
+        "tooltip": true,
+        "exec": "~/.config/waybar/scripts/wireguard-info.sh",
+        "on-click": "exec ~/.config/scripts/wireguard.sh toggle",
+        "format-icons": {
+            "activated": "󰳈",
+            "deactivated": "󰦜",
+            "none": "󰫝"
+        }
+    },
+	"custom/power": {
+		"format": "󰐥",
+		"tooltip": false
+	},
+	"custom/shutdown": {
+		"format": "󰤂",
+		"tooltip-format": "shutdown",
+		"on-click": "systemctl poweroff" 
+	},
+	"custom/reboot": {
+		"format": "󰜉",
+		"tooltip-format": "reboot",
+		"on-click": "systemctl reboot"
+	},
+	"custom/logout": {
+		"format": "󰈆",
+		"tooltip-format": "logout",
+		"on-click": "hyprshutdown"
+	}
+}

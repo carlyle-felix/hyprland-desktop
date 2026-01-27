@@ -1,0 +1,9 @@
+exec-once = waybar
+exec-once = mako
+exec-once = hyprpaper
+exec-once = hypridle
+exec-once = hyprpm enable hyprexpo
+exec-once = /usr/libexec/hyprpolkitagent
+exec-once = /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
+exec-once = systemctl start --user xdg-desktop-portal-hyprland.service
+exec-once = hyprpm reload

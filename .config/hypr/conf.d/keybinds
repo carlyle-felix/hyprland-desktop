@@ -1,0 +1,23 @@
+# volume.sh
+bindel = , XF86AudioRaiseVolume, exec, ~/.config/scripts/volume.sh --inc 5
+bindel = , XF86AudioLowerVolume, exec, ~/.config/scripts/volume.sh --dec 5
+bindel = , XF86AudioMicMute, exec, ~/.config/scripts/volume.sh --toggle-mic 
+bindel = , XF86AudioMute, exec, ~/.config/scripts/volume.sh --toggle
+
+# backlight.sh
+bindel = , XF86MonBrightnessUp, exec, ~/.config/scripts/backlight.sh --inc 5 
+bindel = , XF86MonBrightnessDown, exec, ~/.config/scripts/backlight.sh --dec 5
+
+
+# Screenshot a window
+bind = $mainMod, Print, exec, hyprshot -m window
+# Screenshot a monitor
+bind = , Print, exec, hyprshot -m output -m eDP-1
+# Screenshot a region
+bind = $mainMod SHIFT, Print, exec, hyprshot -m region
+
+# ssh
+# bind = $mainMod SHIFT, Q, exec, kitty kitty +kitten ssh <user>@<host>
+
+# toggle wireguard VPN
+bind = $mainMod SHIFT, W, exec, ~/.config/scripts/wireguard.sh toggle

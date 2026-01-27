@@ -1,0 +1,10 @@
+plugin {
+    hyprexpo {
+        columns = 2
+        gap_size = 5
+        bg_col = 0xFF2B303B
+        workspace_method = center current
+    }
+}
+
+bind = SUPER, SPACE, hyprexpo:expo, toggle
