@@ -9,5 +9,5 @@
 ![Waybar power group](images/2026-01-27-091457_hyprshot.png)  
 #### waybar power group and power menu opened
 ![Waybar power-menu group](images/2026-01-27-091505_hyprshot.png)  
-#### waybar hardware group and power menu opened
-![Waybar hardware and groups](images/2026-01-27-091541_hyprshot.png)
+#### waybar hardware and power groups opened
+![Waybar hardware and power groups](images/2026-01-27-091541_hyprshot.png)
